@@ -65,13 +65,22 @@ to taget a component ceate a `class="flex-container" ` in a div and add some css
   <div class="flex-container"> </div>
 ```
 
- 
+ ## bootstrap layout : understanding 12 column bootstrap layout system
 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuYF88lq-D3zQPMKtcICpeP-X65_FVe_FzXwrghVPd_KE49pykoSIB0nbUb49rlF_HJQ&usqp=CAU">
 
+> div class="container"
+>   div class="rows"
+>     div class="col"
+>
 
+<img src="https://designmodo.com/wp-content/uploads/2021/03/1.png">
 
+we write like this:
 
+<img src="https://www.i2tutorials.com/wp-content/media/2020/10/Bootstrap-Grid-System-2.png">
 
+in this example we use `sm` so if client screen small then size sm 'pixel' then any culomn show 100% of screen
 
 
 
