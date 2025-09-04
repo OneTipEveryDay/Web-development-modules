@@ -82,6 +82,95 @@ we write like this:
 
 in this example we use `sm` so if client screen small then size sm 'pixel' then any culomn show 100% of screen
 
+### Responsive containers 
+
+Responsive containers allow you to specify a class that is 100% wide until the specified breakpoint is reached, after which we apply max-widths for each of the higher breakpoints. For example, .container-sm is 100% wide to start until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl.
+
+```
+<div class="container-sm">100% wide until small breakpoint</div>
+<div class="container-md">100% wide until medium breakpoint</div>
+<div class="container-lg">100% wide until large breakpoint</div>
+<div class="container-xl">100% wide until extra large breakpoint</div>
+<div class="container-xxl">100% wide until extra extra large breakpoint</div>
+```
+
+## Components
+
+### button
+<a src="https://getbootstrap.com/docs/5.3/customize/color/"> read more about colors</a>
+example:
+
+<img width="1109" height="126" alt="image" src="https://github.com/user-attachments/assets/1b86d472-1125-4850-82a0-96c423795890" />
+```
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
+<button type="button" class="btn btn-link">Link</button>
+```
+
+Base class <br>
+Bootstrap has a base .btn class that sets up basic styles such as padding and content alignment. By default, .btn controls have a transparent border and background color, and lack any explicit focus and hover styles
+
+```html
+<button type="button" class="btn">Base class</button>
+```
+
+Outline buttons <br>
+In need of a button, but not the hefty background colors they bring? Replace the default modifier classes with the .btn-outline-* ones to remove all background images and colors on any button.
+
+<img width="1243" height="107" alt="image" src="https://github.com/user-attachments/assets/fbf82aff-6bbe-49b2-ac83-b9976e16db28" />
+
+```html
+<button type="button" class="btn btn-outline-primary">Primary</button>
+<button type="button" class="btn btn-outline-secondary">Secondary</button>
+<button type="button" class="btn btn-outline-success">Success</button>
+<button type="button" class="btn btn-outline-danger">Danger</button>
+<button type="button" class="btn btn-outline-warning">Warning</button>
+<button type="button" class="btn btn-outline-info">Info</button>
+<button type="button" class="btn btn-outline-light">Light wanderful!!!</button>   
+<button type="button" class="btn btn-outline-dark">Dark</button>
+```
+
+<a src="https://getbootstrap.com/docs/5.3/components/button-group/">Button group
+</a>
+
+<a src="https://getbootstrap.com/docs/5.3/components/card/"> cards</a>
+
+> Collapse
+<img width="451" height="243" alt="image" src="https://github.com/user-attachments/assets/a697d2de-34d7-40fd-a2cb-6699e13ce5a2" />
+
+```html
+<p>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+    Toggle width collapse
+  </button>
+</p>
+<div style="min-height: 120px;">
+  <div class="collapse collapse-horizontal" id="collapseWidthExample">
+    <div class="card card-body" style="width: 300px;">
+      This is some placeholder content for a horizontal collapse. It’s hidden by default and shown when triggered.
+    </div>
+  </div>
+</div>
+```
+
+>modal js popop 
+>Pagination
+
+
+ش
+ش
+شش
+
+
+
+
+
 
 
 
