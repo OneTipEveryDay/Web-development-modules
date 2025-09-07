@@ -2,9 +2,9 @@
 > It is commonly used for transmitting data in web applications .
 
 # JSON structure
-<p>
- The following is a valid JSON string representing an object. Note that it is also a valid JavaScript object literal — just with some more syntax restrictions.
-</p>
+
+ > The following is a valid JSON string representing an object. Note that it is also a valid JavaScript object literal — > just with some more syntax restrictions.
+
  ```json
 {
   "squadName": "Super hero squad",
