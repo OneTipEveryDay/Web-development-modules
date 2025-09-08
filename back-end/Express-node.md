@@ -257,6 +257,278 @@ Views (templates) used by the controllers to render the data.
 
 > A route is a section of Express code that associates an HTTP verb (GET, POST, PUT, DELETE, etc.), a URL path/pattern, and a function that is called to handle that pattern.
 
+## Defining and using separate route modules
+
+The code below provides a concrete example of how we can create a route module and then use it in an Express application.
+```js
+// wiki.js - Wiki route module.
+
+const express = require("express");
+
+const router = express.Router();
+
+// Home page route.
+router.get("/", (req, res) => {
+  res.send("Wiki home page");
+});
+
+// About page route.
+router.get("/about", (req, res) => {
+  res.send("About this wiki");
+});
+
+module.exports = router;
+```
+> To use the router module in our main app file we first require() the route module (wiki.js). We then call use() on the > Express application to add the Router to the middleware handling path, specifying a URL path of 'wiki'.
+
+```
+const wiki = require("./wiki.js");
+
+// …
+app.use("/wiki", wiki);
+```
+
+The two routes defined in our wiki route module are then accessible from /wiki/ and /wiki/about/.
+
+## Route functions
+
+> The callback takes three arguments (usually named as shown: req, res, next), that will contain the HTTP Request object, > HTTP response, and the next function in the middleware chain
+> The callback function here calls send() on the response to return the string "About this wiki" when we receive a GET > request with the path (/about). 
+>  you could call res.json() to send a JSON response or res.sendFile() to send a file. The response method that we'll be using most often as we build up the library is render(), which creates and returns HTML files using templates and data—we'll talk a lot more about that in a later article!
+
+## Create the catalog route module
+
+Next we create routes for all the URLs needed by the LocalLibrary website, which will call the controller functions we defined in the previous sections.
+
+```
+/express-locallibrary-tutorial # the project root
+  /routes
+    index.js
+    users.js
+    catalog.js
+```
+Open /routes/catalog.js and copy in the code below:
+
+```js
+
+const express = require("express");
+
+// Require controller modules.
+const book_controller = require("../controllers/bookController");
+const author_controller = require("../controllers/authorController");
+const genre_controller = require("../controllers/genreController");
+const book_instance_controller = require("../controllers/bookinstanceController");
+
+const router = express.Router();
+
+/// BOOK ROUTES ///
+
+// GET catalog home page.
+router.get("/", book_controller.index);
+
+// GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
+router.get("/book/create", book_controller.book_create_get);
+
+// POST request for creating Book.
+router.post("/book/create", book_controller.book_create_post);
+
+// GET request to delete Book.
+router.get("/book/:id/delete", book_controller.book_delete_get);
+
+// POST request to delete Book.
+router.post("/book/:id/delete", book_controller.book_delete_post);
+
+// GET request to update Book.
+router.get("/book/:id/update", book_controller.book_update_get);
+
+// POST request to update Book.
+router.post("/book/:id/update", book_controller.book_update_post);
+
+// GET request for one Book.
+router.get("/book/:id", book_controller.book_detail);
+
+// GET request for list of all Book items.
+router.get("/books", book_controller.book_list);
+
+/// AUTHOR ROUTES ///
+
+// GET request for creating Author. NOTE This must come before route for id (i.e. display author).
+router.get("/author/create", author_controller.author_create_get);
+
+// POST request for creating Author.
+router.post("/author/create", author_controller.author_create_post);
+
+// GET request to delete Author.
+router.get("/author/:id/delete", author_controller.author_delete_get);
+
+// POST request to delete Author.
+router.post("/author/:id/delete", author_controller.author_delete_post);
+
+// GET request to update Author.
+router.get("/author/:id/update", author_controller.author_update_get);
+
+// POST request to update Author.
+router.post("/author/:id/update", author_controller.author_update_post);
+
+// GET request for one Author.
+router.get("/author/:id", author_controller.author_detail);
+
+// GET request for list of all Authors.
+router.get("/authors", author_controller.author_list);
+
+/// GENRE ROUTES ///
+
+// GET request for creating a Genre. NOTE This must come before route that displays Genre (uses id).
+router.get("/genre/create", genre_controller.genre_create_get);
+
+// POST request for creating Genre.
+router.post("/genre/create", genre_controller.genre_create_post);
+
+// GET request to delete Genre.
+router.get("/genre/:id/delete", genre_controller.genre_delete_get);
+
+// POST request to delete Genre.
+router.post("/genre/:id/delete", genre_controller.genre_delete_post);
+
+// GET request to update Genre.
+router.get("/genre/:id/update", genre_controller.genre_update_get);
+
+// POST request to update Genre.
+router.post("/genre/:id/update", genre_controller.genre_update_post);
+
+// GET request for one Genre.
+router.get("/genre/:id", genre_controller.genre_detail);
+
+// GET request for list of all Genre.
+router.get("/genres", genre_controller.genre_list);
+
+/// BOOKINSTANCE ROUTES ///
+
+// GET request for creating a BookInstance. NOTE This must come before route that displays BookInstance (uses id).
+router.get(
+  "/bookinstance/create",
+  book_instance_controller.bookinstance_create_get,
+);
+
+// POST request for creating BookInstance.
+router.post(
+  "/bookinstance/create",
+  book_instance_controller.bookinstance_create_post,
+);
+
+// GET request to delete BookInstance.
+router.get(
+  "/bookinstance/:id/delete",
+  book_instance_controller.bookinstance_delete_get,
+);
+
+// POST request to delete BookInstance.
+router.post(
+  "/bookinstance/:id/delete",
+  book_instance_controller.bookinstance_delete_post,
+);
+
+// GET request to update BookInstance.
+router.get(
+  "/bookinstance/:id/update",
+  book_instance_controller.bookinstance_update_get,
+);
+
+// POST request to update BookInstance.
+router.post(
+  "/bookinstance/:id/update",
+  book_instance_controller.bookinstance_update_post,
+);
+
+// GET request for one BookInstance.
+router.get("/bookinstance/:id", book_instance_controller.bookinstance_detail);
+
+// GET request for list of all BookInstance.
+router.get("/bookinstances", book_instance_controller.bookinstance_list);
+
+module.exports = router;
+```
+
+## Update the index route module
+
+We've set up all our new routes, but we still have a route to the original page. Let's instead redirect this to the new index page that we've created at the path /catalog.
+<br>
+Open /routes/index.js and replace the existing route with the function below.
+
+```
+// GET home page.
+router.get("/", (req, res) => {
+  res.redirect("/catalog");
+});
+```
+## Update app.js
+Open app.js and require the catalog route below the other routes (add the third line shown below, underneath the other two that should be already present in the file):
+```
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const catalogRouter = require("./routes/catalog"); // Import routes for "catalog" area of site
+```
+
+Next, add the catalog route to the middleware stack below the other routes (add the third line shown below, underneath the other two that should be already present in the file):
+```
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/catalog", catalogRouter); // Add catalog routes to middleware chain.
+```
+## Testing the routes
+
+```$
+DEBUG=express-locallibrary-tutorial:* npm start
+```
+
+
+# Displaying library data
+
+>‌ We're now ready to add the pages that display the LocalLibrary website books and other data
+>In our previous tutorial articles, we defined Mongoose models that we can use to interact with a database and created some initial library records. We then created all the routes needed for the LocalLibrary website
+>The next step is to provide proper implementations for the pages that display our library information (we'll look at implementing pages featuring forms to create, update, or delete information in later articles). This includes updating the controller functions to fetch records using our models and defining templates to display this information to users.
+
+
+# resourse for myself
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
