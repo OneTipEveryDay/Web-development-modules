@@ -89,7 +89,7 @@ def index(request):
 
 
 ## filename: best/templates/best/index.html
-
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -108,6 +108,7 @@ def index(request):
   {% endif %}
 </body>
 </html>
+
 ```
 
 
