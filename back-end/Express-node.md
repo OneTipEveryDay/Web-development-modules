@@ -239,10 +239,23 @@ Congratulations! You now have a working Express application that can be accessed
 
 ## Routes and controllers
 
+In <a href="https://github.com/OneTipEveryDay/Web-development-modules/new/main/back-end"> Using a Database (with Mongoose) </a> we defined Mongoose models to interact with the database, and used a (standalone) script to create some initial library records. We can now write the code to present that information to users.
 
+> The diagram below is provided as a reminder of the main flow of data and things that need to be implemented when handling an HTTP request/response. In addition to the views and routes the diagram shows "controllers" — functions that separate out the code to route requests from the code that actually processes requests.
+As we've already created the models, the main things we'll need to create are:
 
+<ul>
+  <li>"Routes" to forward the supported requests (and any information encoded in request URLs) to the appropriate controller functions.</li>
+  <li>
+Controller functions to get the requested data from the models, create an HTML page displaying the data, and return it to the user to view in the browser.</li>
+  <li>
+Views (templates) used by the controllers to render the data.
+</li>
+</ul>
 
+## Routes primer
 
+> A route is a section of Express code that associates an HTTP verb (GET, POST, PUT, DELETE, etc.), a URL path/pattern, and a function that is called to handle that pattern.
 
 
 
