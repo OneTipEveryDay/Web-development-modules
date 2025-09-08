@@ -2,6 +2,16 @@
 
 >Node (or more formally Node.js) is an open-source, cross-platform runtime environment that allows developers to create all kinds of server-side tools and applications in JavaScript. The runtime is intended for use outside of a browser context (i.e., running directly on a computer or server OS). As such, the environment omits browser-specific JavaScript APIs and adds support for more traditional OS APIs including HTTP and file system libraries
 
+#### creating express server
+<ul>
+  <li>ceating directory</li>
+  <li>creating index.js</li>
+  <li>instal express</li>
+  <li>npm i </li>
+  <li>writing server in index.js</li>
+</ul>
+
+
 
 ## File system
 
