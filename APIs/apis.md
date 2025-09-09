@@ -93,6 +93,192 @@ We start by creating an AudioContext instance inside which to manipulate our tra
 
 ## Video and audio APIs
 
+### The HTMLMediaElement API
+
+> Part of the HTML spec, the HTMLMediaElement API provides features to allow you to control video and audio players programmatically — for example `HTMLMediaElement.play()`, `HTMLMediaElement.pause()`, etc. This interface is available to both `<audio> ` and `<video>` elements
+
+### Getting started 
+‌
+
+> To get started with this example, follow these steps:
+
+> 1.Create a new directory on your hard drive called custom-video-player.
+
+> 2.Create a new file inside it called index.html and fill it with the following content:
+
+```html
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video player example</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="player">
+      <video controls>
+        <source
+          src="/shared-assets/videos/sintel-short.mp4"
+          type="video/mp4" />
+        <source
+          src="/shared-assets/videos/sintel-short.webm"
+          type="video/webm" />
+      </video>
+      <div class="controls">
+        <button
+          class="play"
+          data-icon="P"
+          aria-label="play pause toggle"></button>
+        <button class="stop" data-icon="S" aria-label="stop"></button>
+        <div class="timer">
+          <div></div>
+          <span aria-label="timer">00:00</span>
+        </div>
+        <button class="rwd" data-icon="B" aria-label="rewind"></button>
+        <button class="fwd" data-icon="F" aria-label="fast forward"></button>
+      </div>
+    </div>
+    <p>
+      Sintel &copy; copyright Blender Foundation |
+      <a href="https://studio.blender.org/films/sintel/"
+        >studio.blender.org/films/sintel/</a
+      >.
+    </p>
+    <script src="custom-player.js"></script>
+  </body>
+</html>
+```
+```css
+@font-face {
+  font-family: "HeydingsControlsRegular";
+  src: url("https://mdn.github.io/learning-area/javascript/apis/video-audio/finished/fonts/heydings_controls-webfont.eot");
+  src:
+    url("https://mdn.github.io/learning-area/javascript/apis/video-audio/finished/fonts/heydings_controls-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://mdn.github.io/learning-area/javascript/apis/video-audio/finished/fonts/heydings_controls-webfont.woff")
+      format("woff"),
+    url("https://mdn.github.io/learning-area/javascript/apis/video-audio/finished/fonts/heydings_controls-webfont.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+video {
+  border: 1px solid black;
+}
+
+p {
+  position: absolute;
+  top: 310px;
+}
+
+.player {
+  position: absolute;
+}
+
+.controls {
+  visibility: hidden;
+  opacity: 0.5;
+  width: 400px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  background-color: black;
+  box-shadow: 3px 3px 5px black;
+  transition: 1s all;
+  display: flex;
+}
+
+.player:hover .controls,
+.player:focus-within .controls {
+  opacity: 1;
+}
+
+button,
+.controls {
+  background: linear-gradient(to bottom, #222222, #666666);
+}
+
+button::before {
+  font-family: HeydingsControlsRegular;
+  font-size: 20px;
+  position: relative;
+  content: attr(data-icon);
+  color: #aaaaaa;
+  text-shadow: 1px 1px 0px black;
+}
+
+.play::before {
+  font-size: 22px;
+}
+
+button,
+.timer {
+  height: 38px;
+  line-height: 19px;
+  box-shadow: inset 0 -5px 25px #0000004d;
+  border-right: 1px solid #333333;
+}
+
+button {
+  position: relative;
+  border: 0;
+  flex: 1;
+  outline: none;
+}
+
+.play {
+  border-radius: 10px 0 0 10px;
+}
+
+.fwd {
+  border-radius: 0 10px 10px 0;
+}
+
+.timer {
+  line-height: 38px;
+  font-size: 10px;
+  font-family: monospace;
+  text-shadow: 1px 1px 0px black;
+  color: white;
+  flex: 5;
+  position: relative;
+}
+
+.timer div {
+  position: absolute;
+  background-color: rgb(255 255 255 / 20%);
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 38px;
+  z-index: 2;
+}
+
+.timer span {
+  position: absolute;
+  z-index: 3;
+  left: 19px;
+}
+
+button:hover,
+button:focus {
+  box-shadow: inset 1px 1px 2px black;
+}
+
+button:active {
+  box-shadow: inset 3px 3px 2px black;
+}
+
+.active::before {
+  color: red;
+}
+```
+> 4.Create another new file in the directory called custom-player.js. Leave it blank for now.
+
 
 
 
