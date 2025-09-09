@@ -149,6 +149,7 @@ We start by creating an AudioContext instance inside which to manipulate our tra
   </body>
 </html>
 ```
+and write style.css :
 ```css
 @font-face {
   font-family: "HeydingsControlsRegular";
@@ -277,30 +278,167 @@ button:active {
   color: red;
 }
 ```
+<img width="1455" height="694" alt="image" src="https://github.com/user-attachments/assets/563e05bd-b429-4157-8e3b-4393e01708cf" />
+
 > 4.Create another new file in the directory called custom-player.js. Leave it blank for now.
 
+### Implementing the JavaScript
+We've got a fairly complete HTML and CSS interface already; now we just need to wire up all the buttons to get the controls working.
+<br>
+1.At the top of the custom-player.js file, insert the following code:
 
 
+```js
+const media = document.querySelector("video");
+const controls = document.querySelector(".controls");
+
+const play = document.querySelector(".play");
+const stop = document.querySelector(".stop");
+const rwd = document.querySelector(".rwd");
+const fwd = document.querySelector(".fwd");
+
+const timerWrapper = document.querySelector(".timer");
+const timer = document.querySelector(".timer span");
+const timerBar = document.querySelector(".timer div");
+```
+2.Next, insert the following at the bottom of your code:
 
 
+```
+media.removeAttribute("controls");
+controls.style.visibility = "visible";
+```
+These two lines remove the default browser controls from the video, and make the custom controls visible.
+
+### Playing and pausing the video
+1.First of all, add the following to the bottom of your code, so that the playPauseMedia() function is invoked when the play button is clicked:
+
+``` play.addEventListener("click", playPauseMedia);```
+2. Now to define playPauseMedia() — add the following, again at the bottom of your code:
+
+```js
+function playPauseMedia() {
+  if (media.paused) {
+    play.setAttribute("data-icon", "u");
+    media.play();
+  } else {
+    play.setAttribute("data-icon", "P");
+    media.pause();
+  }
+}
+```
+### Stopping the video
+
+1.Next, let's add functionality to handle stopping the video. Add the following addEventListener() lines below the previous one you added:
+
+```
+stop.addEventListener("click", stopMedia);
+media.addEventListener("ended", stopMedia);
+```
+The click event is obvious — we want to stop the video by running our stopMedia() function when the stop button is clicked. We do however also want to stop the video when it finishes playing — this is marked by the ended event firing, so we also set up a listener to run the function on that event firing too.
+
+2. Next, let's define stopMedia() — add the following function below playPauseMedia():
 
 
+```
+function stopMedia() {
+  media.pause();
+  media.currentTime = 0;
+  play.setAttribute("data-icon", "P");
+}
+```
+
+## Drawing graphics
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Client-side_APIs/Drawing_graphics
+
+# What are third party APIs?
+> Third party APIs are APIs provided by third parties — generally companies such as Facebook, Twitter, or Google — to allow you to access their functionality via JavaScript and use it on your site. One of the most obvious examples is using mapping APIs to display custom maps on your pages.
+
+## They are found on third-party servers
+
+To access them from JavaScript you first need to connect to the API functionality and make it available on your page
+
+```html
+<script
+  src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"
+  defer></script>
+<link
+  rel="stylesheet"
+  href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
+```
+You can then start using the objects available in that library. For example:
+
+```js
+const map = L.mapquest.map("map", {
+  center: [53.480759, -2.242631],
+  layers: L.mapquest.tileLayer("map"),
+  zoom: 12,
+});
+```
+> Here we are creating a variable to store the map information in, then creating a new map using the mapquest.map() method, which takes as its parameters the ID of a <div> element you want to display the map in ('map'), and an options object containing the details of the particular map we want to display. In this case we specify the coordinates of the center of the map, a map layer of type map to show (created using the mapquest.tileLayer() method), and the default zoom level.
+> This is all the information the Mapquest API needs to plot a simple map. The server you are connecting to handles all the complicated stuff, like displaying the correct map tiles for the area being shown, etc.
 
 
+## They usually require API keys
+Security for browser APIs
 
+## Mapquest example
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapquest example</title>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js" defer></script>
+    <script src="script.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Simple Mapquest example</h1>
 
+    <div id="map"></div>
+  </body>
+</html>
+```
 
+style: 
+```
+#map {
+  width: 600px;
+  height: 600px;
+}
+```
+index.js:
+```L.mapquest.key = 'YOUR-API-KEY-HERE';
 
+// 'map' refers to a <div> element with the ID map
+const map = L.mapquest.map('map', {
+  center: [53.480759, -2.242631],
+  layers: L.mapquest.tileLayer('map'),
+  zoom: 12
+});
+```
 
+> Next, you need to go to the Mapquest developer site, create an account, and then create a developer key to use with your example. (At the time of writing, it was called a "consumer key" on the site, and the key creation process also asked for an optional "callback URL". You don't need to fill in a URL here: just leave it blank.)
+> Open up your starting file, and replace the API key placeholder with your key
 
+## costomize
+<a href="https://developer.mapquest.com/documentation/sdks/mapquest-js/l-mapquest-map.html"> for more information rea documents </a>
 
+# piblic api list 
+<a href="https://github.com/public-apis/public-apis"> click me</a>
 
+# Building your own api
+> Monetised apis
+> > data calection
+> > algorithm service
+> > simplified interface
 
-
-
-
-
-
+## using GET method for a example
+ <a href=" https://documenter.getpostman.com/view/6048123/2s9XxsTv8Y
+"> joke Api</a>
 
 
 
