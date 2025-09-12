@@ -26,7 +26,9 @@ sql read code
 ```sql
 SELECT * FROM <name of table>
 ```
-for emplemented node and backend take few steps :
+
+## how to connect database to backend
+###‌ for emplemented node and backend take few steps 
 
 >‌ 1. install pg npm package
 > 2. create index.js
@@ -51,8 +53,8 @@ import pg from "pg";
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
-  database: "world",
-  password: "123456",
+  database: "databasename",
+  password: "your password",
   port: 5432,
 });
 
@@ -289,7 +291,113 @@ button:hover {
 background image
 <img width="2000" height="2000" alt="image" src="https://github.com/user-attachments/assets/066c04d7-12c1-443d-9a5e-f8879b3b25d6" />
 
-for more develope example look at templates EJS 
+### for more develope example look at templates EJS 
+....
+
+## query data using WHERE and LIKE
+### food world example
+> 1.create a table in pgadmin name world-food look at world-food.csv and create col like that 
+
+```
+CREATE TABLE food_world (
+	id SERIAL PRIMARY KEY,
+	country VARCHAR(45),
+	rice_production FLOAT,
+	wheat_production FLOAT
+);
+```
+>[!ERROR]
+>  csv file dont have id col when you import it make shore click on to x
+>id will generated serial
+
+
+> 2. select eveything from table (write in query tool ) (how?)
+> 3. select one column `SELECT COLNAME FROM TABLENAME`
+> 4. select multi  column `SELECT COLNAME1, colname2 FROM TABLENAME`
+> 5. for check a condition : `SELECT COLNAME FROM TABLENAME WHERE CONDITION;`
+> 6. EXAMPLE: SELECT rice_producion FROM food_world WHERE country= 'United States';
+> 7. for check matching things `SELECT COLNAME FROM TABLENAME WHERE COLNAME LIKE pattern;`
+> 8. for example `united states ` and  ` united states of america`
+> 9. example : SELECT country FROM food_world WHERE country  LIKE 'U' || '%';
+
+
+## doing cool exersise travel tracker
+...
+
+
+
+# insert data to table
+``` INSERT INTO TABLE (COL1, COL2) VALUES (VAL1, VAL2) ```
+``` db.query(INSERT INTO TABLE (COL1, COL2) VALUES (VAL1, VAL2) , ["italy", 2.541]) ```
+
+# relationship types
+
+<img width="891" height="537" alt="image" src="https://github.com/user-attachments/assets/605e0287-ef52-486b-9906-944fd48a6268" />
+
+## one to one
+```
+CREATE TABLE student (
+    id INT PRIMARY KEY,
+    fname VARCHAR(50) ,
+    lname VARCHAR(50));
+
+CREATE TABLE cantact_detals (
+    id INT PRIMARY KEY,
+    address TEXT,
+    mager VARCHAR(50)
+    );
+```
+how to use : 
+
+```
+SELECT *
+FROM student
+JOIN contact_detals
+ON student.id = contact_detals.id
+```
+output show me two table with 1 col  that `JOIN` together and build one table
+
+## one to many
+<img width="1329" height="489" alt="image" src="https://github.com/user-attachments/assets/ff4083de-cba7-4bde-991f-91f5cbda1d58" />
+
+```
+CREATE TABLE student (
+    id SERIAL PRIMARY KEY,
+    fname VARCHAR(50) ,
+    lname VARCHAR(50));
+
+CREATE TABLE htmeworks (
+    id SERIAL PRIMARY KEY,
+    mark INTEGER ,
+    student_id INTEGER REFERENCES student(id)
+);
+
+
+
+```
+> student_id INTEGER REFERENCES student(id) line actuely is this
+> student_id INTEGER REFERENCES TABLENAKE(FIELD)
+
+```
+SELECT *
+FROM student
+JOIN HOMEWORK
+ON student.id = student_id
+```
+
+OUTPUT WILL BE:
+<img width="772" height="244" alt="image" src="https://github.com/user-attachments/assets/45b687f5-13a2-4253-8988-e8877c41ee44" />
+
+## many to many
+
+
+
+
+
+
+
+
+
 
 
 
