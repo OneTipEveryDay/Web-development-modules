@@ -388,14 +388,24 @@ ON student.id = student_id
 OUTPUT WILL BE:
 <img width="772" height="244" alt="image" src="https://github.com/user-attachments/assets/45b687f5-13a2-4253-8988-e8877c41ee44" />
 
-## many to many
+## example 2
+...
 
+# update and delete (ALTER , DROP, UPDATE)
 
+> ALTER : FOR CHANGE طرح جدول
 
+```
+ALTER TABLE TABLEtoALTER
+	DO SOMTHING
+```
+FOR EXAMPLE RENAME:
 
-
-
-
+```
+ALTER TABLE student
+	RENAME TO‌ user
+```
+### final example
 
 
 
