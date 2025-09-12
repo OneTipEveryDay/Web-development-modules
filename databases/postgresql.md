@@ -21,8 +21,20 @@ after half dey i see pgadmin filtered and i need a vpn (just hello dear iran)
 > 8. go view/Edit data / all rows
 > 9. 
 
+### read from a postgres database
+sql read code 
+```sql
+SELECT * FROM <name of table>
+```
+for emplemented node and backend take few steps :
 
-
+>‌ 1. install pg npm package
+> 2. create index.js
+> 3. import pg from "pg"
+> 4. const db = new pg.Client(....);
+> 5. db.connect();
+> 6. choise a table from database  db.query(....);
+> 7.  de.end();
 
 
 
