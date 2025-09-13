@@ -98,11 +98,95 @@ export default Heading;
 > 8. end
 >
 
+# React Props
 
+> sopose we have pictures + `<p>`s (many div) for using react we Write a function that have component (img h1 p)
+> but we have problem
+> for calling  them we dont have costomiz atrebute for objects
+> you must bellow on object write `<input >` tag then you can write `<objecName   costomizeAtrebute = value />`
+> now function(props) {};
+> you can use props.costomizeAtrebute then see value
 
+example code: 
 
+<img width="994" height="314" alt="image" src="https://github.com/user-attachments/assets/84596f63-ed21-4b9e-8649-54ad1b18b764" />
 
+vite-config.js
 
+```
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+```
+app.jsx
+
+```
+import React from "react";
+import Card from "./Card";
+import contacts from "../contacts";
+
+function App() {
+  return (
+    <div>
+      <h1 className="heading">My Contacts</h1>
+      <Card
+        name={contacts[0].name}
+        img={contacts[0].imgURL}
+        tel={contacts[0].phone}
+        email={contacts[0].email}
+      />
+      <Card
+        name={contacts[1].name}
+        img={contacts[1].imgURL}
+        tel={contacts[1].phone}
+        email={contacts[1].email}
+      />
+      <Card
+        name={contacts[2].name}
+        img={contacts[2].imgURL}
+        tel={contacts[2].phone}
+        email={contacts[2].email}
+      />
+    </div>
+  );
+}
+
+export default App;
+
+```
+contacts.js
+```
+const contacts = [
+  {
+    name: "Beyonce",
+    imgURL:
+      "https://blackhistorywall.files.wordpress.com/2010/02/picture-device-independent-bitmap-119.jpg",
+    phone: "+123 456 789",
+    email: "b@beyonce.com"
+  },
+  {
+    name: "Jack Bauer",
+    imgURL:
+      "https://pbs.twimg.com/profile_images/625247595825246208/X3XLea04_400x400.jpg",
+    phone: "+987 654 321",
+    email: "jack@nowhere.com"
+  },
+  {
+    name: "Chuck Norris",
+    imgURL:
+      "https://i.pinimg.com/originals/e3/94/47/e39447de921955826b1e498ccf9a39af.png",
+    phone: "+918 372 574",
+    email: "gmail@chucknorris.com"
+  }
+];
+
+export default contacts;
+
+```
 
 
 
