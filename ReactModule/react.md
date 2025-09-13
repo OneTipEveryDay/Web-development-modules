@@ -13,9 +13,7 @@ what is react ?‌ ` a javascript library for building user interface همچنی
 > 4. create index.js
 > 5. add dependese (react)
 > 6. `import react from "react";        import { createRoot } from "react-dom/client";`
-> 7. ```const root = createRoot(document.getElementById("app"));
-root.render(<h1>helooo</h1>);
-```
+> 7. `const root = createRoot(document.getElementById("app"));    root.render(<h1>helooo</h1>);`
 
 > 9. react work with JSX file format and Babel is a javascript compiler
  
@@ -23,16 +21,82 @@ root.render(<h1>helooo</h1>);
 <br>
  for Start the development server: `npm run dev`
 
-###  dv
+###  javascript code inside html code inside index.js
+
+>‌ if we have varible that i want to show in h1 taq inside index.js how can i do?
+
+```
+import "./styles.css";
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+var name = "momahdi";
+
+const root = createRoot(document.getElementById("app"));
+
+root.render(<h1>hello {name}</h1>);
+
+```
+even you can write javascript code inside {} 
+
+```
+import "./styles.css";
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+var name = "momahdi";
+
+const root = createRoot(document.getElementById("app"));
+
+root.render(<h1>hello { Math.random() }</h1>);
+
+```
+we cont write javascript statment! like
+
+```
+{
+ if (name == moamahdi){
+  //do somthing}
+ else{
+  //de somthing else}
+
+}
+```
+(what is deffrence expresion and statment ? )
 
 
+## how to add css (styling)?
+> 1. target a eleman and create a className atrebute
+> 2. open style.css and write your code in `.className {//somthing}
 
+contenteditable
 
+```
+<h1 className="atrib" contenteditable="true">
+    hello {name}
+  </h1>
+```
+# React component 
+we want create a function  return a html element (h1)
 
+> 1.create a function :
+```
+function Heading() {
+ return <h1> hello world </h1>
+}
+```
+> 2. write `<Heading/>` evrywere you want to show h1
+> 3. create a file Heading.jsx and function Heading()  Ctrl+X Ctrl+V here
+> 4. beffore it you must import react from "React";
+> 5. then
 
+```
+export default Heading;
+```
 
-
-
+> 7.back to index.js and import Hrading from "./Heading";
+> 8. end
+>
 
 
 
