@@ -315,10 +315,6 @@ func2 ( ()=>{
 > func2 is a tipical function like .filter() ,...
 > func1 that you writen in code
 ```
-## react conditional rendering with ternary operator and operator
-
-
-
 
 
 
